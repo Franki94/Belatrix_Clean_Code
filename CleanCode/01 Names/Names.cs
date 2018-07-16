@@ -2,16 +2,16 @@
 
 namespace CleanCode.Names
 {
-    public class Names
+    public class GraficWriter
     {
-        public Bitmap Method1(string n)
+        public Bitmap WriteInImage(string fileName)
         {
-            var b = new Bitmap(n);
-            var g = Graphics.FromImage(b);
-            g.DrawString("a", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 0));
-            g.DrawString("b", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 20));
-            g.DrawString("c", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 30));
-            return b;
+            var bitmapFile = new Bitmap(fileName);
+            var graficImage = Graphics.FromImage(bitmapFile);
+            graficImage.DrawString("a", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 0));
+            graficImage.DrawString("b", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 20));
+            graficImage.DrawString("c", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 30));
+            return bitmapFile;
         }
     }
 }
