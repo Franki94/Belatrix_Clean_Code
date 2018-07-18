@@ -5,11 +5,11 @@ namespace CleanCode.MagicNumbers
     {
         public void ApproveDocument(int status)
         {
-            if (status == 1)
+            if (status == (int)StatusDocumentApprove.Active)
             {
                 // ...
             }
-            else if (status == 2)
+            else if (status == (int)StatusDocumentApprove.Process)
             {
                 // ...
             }
@@ -19,13 +19,27 @@ namespace CleanCode.MagicNumbers
         {
             switch (status)
             {
-                case "1":
+                case StatusDocumentReject.Waiting:
                     // ...
                     break;
-                case "2":
+                case StatusDocumentReject.Rejected:
                     // ...
                     break;
             }
         }
     }
+    public static class StatusDocumentReject
+    {
+        public const string Waiting = "1";
+        public const string Rejected = "2";
+    }
+
+    public enum StatusDocumentApprove
+    {
+        Active = 1,
+        Process = 2,
+    }        
 }
+
+
+
