@@ -3,13 +3,13 @@ namespace CleanCode.MagicNumbers
 {
     public class MagicNumbers
     {
-        public void ApproveDocument(int status)
+        public void ApproveDocument(StatusDocumentApprove status)
         {
-            if (status == (int)StatusDocumentApprove.Active)
+            if (status == StatusDocumentApprove.Active)
             {
                 // ...
             }
-            else if (status == (int)StatusDocumentApprove.Process)
+            else if (status == StatusDocumentApprove.Process)
             {
                 // ...
             }
