@@ -7,44 +7,22 @@ namespace SOLID._03_Liskov_substitution
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public Employee()
-        {
-        }
-
-        public Employee(int id, string name)
-        {
-            this.ID = id; this.Name = name;
-        }
-
-        public abstract decimal CalculateBonus(decimal salary);
-
         public override string ToString()
         {
-            return string.Format("ID : {0} Name : {1}", this.ID, this.Name);
+            return string.Format($"ID : {ID} Name : {Name}");
         }
-    }
-
-    public class PermanentEmployee : Employee
+    }  
+    public class PermanentEmployee : Employee , IEmployeeWithBonus
     {
-        public PermanentEmployee()
-        { }
-
-        public PermanentEmployee(int id, string name) : base(id, name)
-        { }
-        public override decimal CalculateBonus(decimal salary)
+        public decimal CalculateBonus(decimal salary)
         {
             return salary * .1M;
         }
     }
 
-    public class TemporaryEmployee : Employee
+    public class TemporaryEmployee : Employee, IEmployeeWithBonus
     {
-        public TemporaryEmployee()
-        { }
-
-        public TemporaryEmployee(int id, string name) : base(id, name)
-        { }
-        public override decimal CalculateBonus(decimal salary)
+        public  decimal CalculateBonus(decimal salary)
         {
             return salary * .05M;
         }
@@ -52,14 +30,11 @@ namespace SOLID._03_Liskov_substitution
 
     public class ContractEmployee : Employee
     {
-        public ContractEmployee()
-        { }
+      
+    }
 
-        public ContractEmployee(int id, string name) : base(id, name)
-        { }
-        public override decimal CalculateBonus(decimal salary)
-        {
-            throw new NotImplementedException();
-        }
+    public interface IEmployeeWithBonus
+    {
+        decimal CalculateBonus(decimal salary);
     }
 }
