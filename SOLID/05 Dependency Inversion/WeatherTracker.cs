@@ -2,31 +2,39 @@
 
 namespace SOLID._05_Dependency_Inversion
 {
-    public class WeatherTracker
+    public abstract class WeatherTracker
     {
-        String currentConditions;
-        INotificationWay _notificationPhone;
-        INotificationWay _notificationEmail;
+        public readonly INotificationWay _notificationWay;
 
-        public WeatherTracker()
+        public WeatherTracker(INotificationWay notificationWay)
         {
-            _notificationPhone = new Phone();
-            _notificationEmail = new Emailer();
+            _notificationWay = notificationWay;
+        }
+        public abstract void SetCurrentConditions(String weatherDescription);
+    }
+    public class WeatherTrackerSunny : WeatherTracker
+    {
+
+        public WeatherTrackerSunny(Emailer emailer) : base ( emailer)
+        {
         }
 
-        public void setCurrentConditions(String weatherDescription)
-        {
-            this.currentConditions = weatherDescription;
-            if (weatherDescription == "rainy")
-            {
-                String alert = _notificationPhone.generateWeatherAlert(weatherDescription);
-                Console.WriteLine(alert);
-            }
-            if (weatherDescription == "sunny")
-            {
-                String alert = _notificationEmail.generateWeatherAlert(weatherDescription);
-                Console.WriteLine(alert);
-            }
+        public override void SetCurrentConditions(String weatherDescription)
+        {            
+                String alert = _notificationWay.generateWeatherAlert(weatherDescription);
+                Console.WriteLine(alert);            
         }        
+    }
+
+    public class WeatherTrackerRainy : WeatherTracker
+    {
+        public WeatherTrackerRainy(Phone phone) : base(phone)
+        {
+        }
+        public override void SetCurrentConditions(String weatherDescription)
+        {
+            String alert = _notificationWay.generateWeatherAlert(weatherDescription);
+            Console.WriteLine(alert);
+        }
     }
 }
