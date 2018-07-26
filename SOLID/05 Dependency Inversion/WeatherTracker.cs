@@ -5,13 +5,13 @@ namespace SOLID._05_Dependency_Inversion
     public class WeatherTracker
     {
         String currentConditions;
-        Phone phone;
-        Emailer emailer;
+        INotificationWay _notificationPhone;
+        INotificationWay _notificationEmail;
 
         public WeatherTracker()
         {
-            phone = new Phone();
-            emailer = new Emailer();
+            _notificationPhone = new Phone();
+            _notificationEmail = new Emailer();
         }
 
         public void setCurrentConditions(String weatherDescription)
@@ -19,14 +19,14 @@ namespace SOLID._05_Dependency_Inversion
             this.currentConditions = weatherDescription;
             if (weatherDescription == "rainy")
             {
-                String alert = phone.generateWeatherAlert(weatherDescription);
+                String alert = _notificationPhone.generateWeatherAlert(weatherDescription);
                 Console.WriteLine(alert);
             }
             if (weatherDescription == "sunny")
             {
-                String alert = emailer.generateWeatherAlert(weatherDescription);
+                String alert = _notificationEmail.generateWeatherAlert(weatherDescription);
                 Console.WriteLine(alert);
             }
-        }
+        }        
     }
 }
